@@ -1,10 +1,10 @@
 ﻿
 
-using Core.Domain.Interfaces;
+using Core.Application.Interfaces.Dtos;
 
-namespace Core.Domain.Entities
+namespace Core.Application.Dtos
 {
-    public class BaseEntity: IBaseEntity
+    public class BaseDto : IBaseDto
     {
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }

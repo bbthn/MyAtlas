@@ -1,10 +1,8 @@
 ﻿
 
-using Core.Domain.Interfaces;
-
-namespace Core.Domain.Entities
+namespace Core.Domain.Interfaces
 {
-    public class BaseEntity: IBaseEntity
+    public interface IBaseEntity
     {
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }
