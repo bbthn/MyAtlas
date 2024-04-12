@@ -16,7 +16,7 @@ namespace Core.Domain.Entities.Url
     public partial class Url
     {
         public string LanguageCode { get; set; }
-        public string LanguageId { get; set; }
+        public Guid LanguageId { get; set; }
     }
     public partial class Url : ISeo
     {
