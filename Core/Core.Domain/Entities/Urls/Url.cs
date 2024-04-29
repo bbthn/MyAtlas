@@ -11,6 +11,8 @@ namespace Core.Domain.Entities.Url
         public string Slug { get; set; }
         public string? EntityName { get; set; }
         public Guid? DataId { get; set; }
+        public byte PageType { get; set; }
+
 
     }
     public partial class Url
@@ -21,11 +23,6 @@ namespace Core.Domain.Entities.Url
     public partial class Url : ISeo
     {
         public string SeoTitle { get; set; }
-    }
-
-    public partial class Url : ILanguage
-    {
-        Guid ILanguage.LanguageId { get; set; }
     }
 
     #region Relations

@@ -11,6 +11,7 @@ namespace Core.Application.Dtos.UrlDtos
         public string Slug { get; set; }
         public string? EntityName { get; set; }
         public Guid? DataId { get; set; }
+        public byte PageType { get; set; }
         public string LanguageCode { get; set; }
         public Guid LanguageId { get; set; }
         public string SeoTitle { get; set; }

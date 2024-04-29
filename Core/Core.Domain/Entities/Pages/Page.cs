@@ -12,6 +12,8 @@ namespace Core.Domain.Entities.Pages
         public string Title { get; set; }
         public string Slug { get; set; }
         public string ActionName { get; set; }
+        public Guid MyControllerId { get; set; }
+
     }
     public partial class Page : ILanguage
     {
@@ -28,9 +30,11 @@ namespace Core.Domain.Entities.Pages
 
     }
 
+
     #region Relations
     public partial class Page
     {
+        [ForeignKey(nameof(MyControllerId))]
         public MyController MyController { get; set; }
        
     }
