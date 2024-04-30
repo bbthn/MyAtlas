@@ -2,6 +2,7 @@
 using Core.Application.Dtos.UrlDtos;
 using Core.Application.Interfaces.ControllerManager.Request;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Presentation.ConrollerManager.Models;
 
 namespace Presentation.ConrollerManager.RequestServices
@@ -21,7 +22,8 @@ namespace Presentation.ConrollerManager.RequestServices
             this.SetLanguage();
             this._currentRequest.CurrentUrl =  await this.GetCurrentUrl();
             this._currentRequest.BaseUrls = await this.GetBaseUrls();
-            this._currentRequest.AddedObjects.Add(nameof(httpContext), httpContext);
+            this._currentRequest.HttpContextAccessor = httpContext.RequestServices.GetService<IHttpContextAccessor>();
+
 
             return this._currentRequest;
         }

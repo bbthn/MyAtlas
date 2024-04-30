@@ -15,11 +15,11 @@ namespace Infrastructure.Persistance.Repositories
 
         private DbSet<T> table => base._context.Set<T>();
 
-        public Task<List<T>> GetAll(
-            Expression<Func<T, bool>>? where, 
-            Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>? orderBy,
+        public async Task<List<T>> GetAllAsync(
+            Expression<Func<T, bool>>? where=null, 
+            Expression<Func<IQueryable<T>, IOrderedQueryable<T>>>? orderBy=null,
             bool asNoTracking = true, 
-            params Expression<Func<IQueryable<T>, IIncludableQueryable<T, object>>>[]? include)
+            Expression<Func<IQueryable<T>, IIncludableQueryable<T, object>>>[] include=null)
         {
             IQueryable<T> query = table.AsQueryable<T>();
             if(!asNoTracking)
@@ -34,12 +34,12 @@ namespace Infrastructure.Persistance.Repositories
                 query = query.Where(where.Compile()).AsQueryable();         
             if (orderBy != null)
                 query = orderBy.Compile()(query);
-            return query.ToListAsync();
+            return await query.ToListAsync();
         }
         public async Task<T> GetSingle(Expression<Func<T, bool>> where,
-           Expression<Func<IQueryable<T>, IOrderedQueryable<T>>> orderBy,
-           bool asNoTracking = true,
-           params Expression<Func<IQueryable<T>, IIncludableQueryable<T, object>>>[] include)
+            Expression<Func<IQueryable<T>, IOrderedQueryable<T>>> orderBy,
+            bool asNoTracking = true,
+            Expression<Func<IQueryable<T>, IIncludableQueryable<T, object>>>[] include = null)
         {
             IQueryable<T> query = table.AsQueryable<T>();
             if(!asNoTracking)

@@ -8,8 +8,8 @@ namespace Core.Application.Enum
 {
     public enum PageTypeEnum
     {
-        EntityDetail,
-        EntityList,
+        Detail,
+        List,
         Content
     }
 }

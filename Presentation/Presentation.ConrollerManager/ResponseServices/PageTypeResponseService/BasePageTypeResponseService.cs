@@ -20,6 +20,7 @@ namespace Presentation.ConrollerManager.ResponseServices.PageTypeResponseService
         {
             this.currentResponse.MyController =await this.GetMyController();
             this.currentResponse.Page = await this.GetPage();
+
             throw new NotImplementedException();
         }
 

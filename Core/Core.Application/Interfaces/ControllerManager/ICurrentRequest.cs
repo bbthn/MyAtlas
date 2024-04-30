@@ -1,6 +1,7 @@
 ﻿using Core.Application.Dtos.LanguageDtos;
 using Core.Application.Dtos.UrlDtos;
 using Core.Domain.Entities.Url;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Interfaces.ControllerManager.Request
 {
@@ -17,5 +18,6 @@ namespace Core.Application.Interfaces.ControllerManager.Request
         public List<ReadUrlDto> BaseUrls { get; set; }
         public ReadLanguageDto LanguageDto { get; set; }
         public Dictionary<string, object> AddedObjects { get; set; }
+        public IHttpContextAccessor HttpContextAccessor { get; set; }
     }
 }

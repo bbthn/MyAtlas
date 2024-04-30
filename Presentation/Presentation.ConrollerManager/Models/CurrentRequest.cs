@@ -1,6 +1,7 @@
 ﻿using Core.Application.Dtos.LanguageDtos;
 using Core.Application.Dtos.UrlDtos;
 using Core.Application.Interfaces.ControllerManager.Request;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace Presentation.ConrollerManager.Models
         public List<ReadUrlDto> BaseUrls { get; set; }
         public ReadLanguageDto LanguageDto { get; set; }
         public Dictionary<string, object> AddedObjects { get; set; }
+        public IHttpContextAccessor HttpContextAccessor { get; set; }
     }
 }
