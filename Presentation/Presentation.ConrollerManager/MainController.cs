@@ -2,9 +2,6 @@
 using Core.Application.Interfaces.ControllerManager.Response;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ConrollerManager.Helpers;
-using Presentation.ConrollerManager.Models;
-using Presentation.ConrollerManager.RequestServices;
-using Presentation.ConrollerManager.ResponseServices.PageTypeResponseService;
 using System.Reflection;
 
 namespace Presentation.ConrollerManager
@@ -25,7 +22,7 @@ namespace Presentation.ConrollerManager
         public async Task<IActionResult> CreatePageAsync()
         {           
             this._currentRequest = await _currentRequestService.Process(this.HttpContext);            
-            this._currentResponse = await _currentResponseService.Process(_currentRequest);
+            this._currentResponse = await _currentResponseService.Process(this._currentRequest);
             this.HttpContext.Items.Add(nameof(this._currentResponse), this._currentResponse);
 
             if(_currentResponse != null)
@@ -33,7 +30,7 @@ namespace Presentation.ConrollerManager
                 return await this.InvokeActionAsync(_currentResponse.MyController.ControllerName, _currentResponse.Page.ActionName);
                 
             }
-            throw new NotImplementedException();
+            throw new ArgumentNullException();
         }
         private async Task<IActionResult> InvokeActionAsync(string controllerName, string actionName)
         {

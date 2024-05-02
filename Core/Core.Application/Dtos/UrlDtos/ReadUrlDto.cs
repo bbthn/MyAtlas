@@ -5,7 +5,7 @@ using Core.Domain.Interfaces;
 
 namespace Core.Application.Dtos.UrlDtos
 {
-    public class ReadUrlDto : BaseDto, IReadDto,IUrl, ILanguage, ISeo
+    public class ReadUrlDto : BaseDto, IReadDto, ILanguage, ISeo
     {
         public string Title { get; set; }
         public string Path { get; set; }
@@ -16,7 +16,6 @@ namespace Core.Application.Dtos.UrlDtos
         public string LanguageCode { get; set; }
         public Guid LanguageId { get; set; }
         public string SeoTitle { get; set; }
-        public Guid UrlId { get; set; }
 
     }  
 }

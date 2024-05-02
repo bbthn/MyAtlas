@@ -28,7 +28,7 @@ namespace Presentation.ConrollerManager.ResponseServices
                     IBasePageTypeResponseService responseService = (IBasePageTypeResponseService)Activator.CreateInstance(type, assemblyHelper.GetConstructorParameters(type,currentRequest.HttpContextAccessor.HttpContext.RequestServices));
                     if(responseService != null)
                     {
-                        this._currentResponse = await responseService.Process();
+                        this._currentResponse = await responseService.Process(currentRequest.CurrentUrl);
                         return this._currentResponse;
                     }
                     else

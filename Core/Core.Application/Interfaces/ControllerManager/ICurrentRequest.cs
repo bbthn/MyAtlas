@@ -15,8 +15,8 @@ namespace Core.Application.Interfaces.ControllerManager.Request
         public string[] ParsedPath { get; set; }
         public Dictionary<string, string> QueryString { get; set; }
         public ReadUrlDto CurrentUrl { get; set; }
-        public List<ReadUrlDto> BaseUrls { get; set; }
-        public ReadLanguageDto LanguageDto { get; set; }
+        public List<ReadUrlDto> Urls { get; set; }
+        public ReadLanguageDto CurrentLanguage { get; set; }
         public Dictionary<string, object> AddedObjects { get; set; }
         public IHttpContextAccessor HttpContextAccessor { get; set; }
     }

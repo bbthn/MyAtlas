@@ -10,29 +10,29 @@ using MediatR;
 
 namespace Core.Application.Features.Queries.UrlQueries.Handlers
 {
-    public class GetAllUrlHandler : IRequestHandler<GetAllUrlQuery, IResultDataDto<List<ReadUrlDto>>>
+    public class GetUrlByPathHandler : IRequestHandler<GetUrlByPathQuery, IResultDataDto<ReadUrlDto>>
     {
         private readonly IReadUrlRepository _readUrlRepository;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public GetAllUrlHandler(IReadUrlRepository readUrlRepository, IMediator mediator, IMapper mapper)
+        public GetUrlByPathHandler(IReadUrlRepository readUrlRepository, IMediator mediator, IMapper mapper)
         {
             _readUrlRepository = readUrlRepository;
             _mediator = mediator;
             _mapper = mapper;
         }
 
-        public async Task<IResultDataDto<List<ReadUrlDto>>> Handle(GetAllUrlQuery request, CancellationToken cancellationToken)
+        public async Task<IResultDataDto<ReadUrlDto>> Handle(GetUrlByPathQuery request, CancellationToken cancellationToken)
         {
-            IResultDataDto<List<ReadUrlDto>> result = new ResultDataDto<List<ReadUrlDto>>();
+            IResultDataDto<ReadUrlDto> result = new ResultDataDto<ReadUrlDto>();
             try
             {
-                List<Url> urls = await _readUrlRepository.GetAllAsync();
-                if (urls.Count > 0)
+                Url url = await _readUrlRepository.GetSingleAsync(where:w=>w.Path == request.Path && w.Status ==(byte)request.Status);
+                if (url !=null)
                 {
-                    List<ReadUrlDto> readUrlDtos = _mapper.Map<List<ReadUrlDto>>(urls);
-                    return result.SetData(readUrlDtos).SetSuccess(true).SetMessage("Success!");
+                    ReadUrlDto readUrlDto = _mapper.Map<ReadUrlDto>(url);
+                    return result.SetData(readUrlDto).SetSuccess(true).SetMessage("Success!");
                 }
                 else
                     return result.SetSuccess(false).SetMessage("Failed!");

@@ -36,7 +36,7 @@ namespace Infrastructure.Persistance.Repositories
                 query = orderBy.Compile()(query);
             return await query.ToListAsync();
         }
-        public async Task<T> GetSingle(Expression<Func<T, bool>> where,
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> where,
             Expression<Func<IQueryable<T>, IOrderedQueryable<T>>> orderBy,
             bool asNoTracking = true,
             Expression<Func<IQueryable<T>, IIncludableQueryable<T, object>>>[] include = null)
