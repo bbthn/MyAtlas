@@ -17,20 +17,22 @@ namespace Infrastructure.Persistance
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            Assembly assembly = Assembly.Load("Core.Application");    
             services.AddDbContext<DataContext>(optionsAction => { optionsAction.UseSqlServer(ConnectionString);},ServiceLifetime.Scoped);
-            AddRepositoryServices(assembly,services);
+            AddRepositoryServices(services);
+
+            dynamic testMyServices =  services.Where(s => s.Lifetime == ServiceLifetime.Scoped);
 
             return services;
         }
 
-        private static void AddRepositoryServices(Assembly assembly,IServiceCollection services)
+        private static void AddRepositoryServices(IServiceCollection services)
         {
             IEnumerable<Type> repositories = Assembly.GetExecutingAssembly().GetTypes().Where(r => r.CustomAttributes.Any(a=>a.AttributeType == typeof(RepositoryInterface)));
             foreach (var repo in repositories)
             {
-                Type @interface = assembly.GetType(repo.GetCustomAttribute<RepositoryInterface>().Interface);
-                if(@interface != null && repo.GetInterface(nameof(@interface)) != null)
+                string interfaceName = repo.GetCustomAttribute<RepositoryInterface>().Interface;
+                Type @interface = repo.GetInterface(interfaceName);
+                if(@interface != null)
                     services.AddScoped(@interface, repo);               
             }
         }
