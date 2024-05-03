@@ -1,5 +1,6 @@
 ﻿
 
+using Core.Application.Attributes;
 using Core.Application.Dtos.UrlDtos;
 using Core.Application.Features.Queries.UrlQueries.Handlers;
 using Core.Application.Interfaces.Repositories.UrlRepository;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance.Repositories.UrlRepository
 {
+    [RepositoryInterface(Interface = "IReadUrlRepository")]
     public class ReadUrlRepository : ReadRepository<Url>, IReadUrlRepository
     {
         public ReadUrlRepository(DataContext context) : base(context)

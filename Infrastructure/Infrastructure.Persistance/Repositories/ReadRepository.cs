@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Persistance.Repositories
 {
-    public class ReadRepository<T> : BaseRepository , IReadRepository<T> where T : BaseEntity
+    public class ReadRepository<T> : BaseRepository, IReadRepository<T> where T : BaseEntity
     {
         public ReadRepository(DataContext context) : base(context) {}
 
