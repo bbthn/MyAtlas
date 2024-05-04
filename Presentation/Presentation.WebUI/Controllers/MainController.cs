@@ -18,7 +18,7 @@ namespace Presentation.ConrollerManager
             _currentResponseService = currentResponseService;
         }
 
-        public async Task<IActionResult> CreatePageAsync()
+        public async Task<IActionResult> CreatePage()
         {
             this._currentRequest = await _currentRequestService.Process(this.HttpContext);
             this._currentResponse = await _currentResponseService.Process(this._currentRequest);
@@ -33,6 +33,8 @@ namespace Presentation.ConrollerManager
         }
         private async Task<IActionResult> InvokeActionAsync(string controllerName, string actionName)
         {
+
+
             if (!string.IsNullOrEmpty(controllerName) && !string.IsNullOrEmpty(actionName))
             {
                 AssemblyHelper assemblyHelper = AssemblyHelper.GetAssemblyHelperSingleton;
@@ -51,20 +53,9 @@ namespace Presentation.ConrollerManager
                 else throw new ArgumentNullException();
             }
             else throw new ArgumentNullException();
+
+
+
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

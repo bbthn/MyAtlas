@@ -25,6 +25,7 @@ namespace Presentation.ConrollerManager.RequestServices
         {
             this.ParseUrl(httpContext);
             this.SetLanguage();
+            this.ParsePath();
             this._currentRequest.Urls = await this.GetAllUrls();
             this._currentRequest.CurrentUrl =  await this.GetCurrentUrl();
             this._currentRequest.HttpContextAccessor = httpContext.RequestServices.GetService<IHttpContextAccessor>();

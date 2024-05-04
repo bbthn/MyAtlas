@@ -7,6 +7,7 @@ namespace Presentation.WebUI.Controllers
 
         public IActionResult Index()
         {
+            var test = this.HttpContext;
             return View();
         }
     }

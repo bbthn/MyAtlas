@@ -27,7 +27,7 @@ namespace Core.Application.Features.Queries.UrlQueries.Handlers
             try
             {
                 List<Url> urls = await _readUrlRepository.GetAllUrl(request.ParsedUrl);
-                if(urls.Count > 0)
+                if(urls != null)
                     return result.SetData(_mapper.Map<List<ReadUrlDto>>(urls)).SetSuccess(true).SetMessage("Success!");
                 else
                     return result.SetSuccess(false).SetMessage("Failed!");
