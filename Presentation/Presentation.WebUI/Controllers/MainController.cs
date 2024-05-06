@@ -1,5 +1,7 @@
 ﻿using Core.Application.Interfaces.ControllerManager.Request;
 using Core.Application.Interfaces.ControllerManager.Response;
+using Core.Application.Interfaces.RedisService;
+using Core.Application.Services.RedisService;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ConrollerManager.Helpers;
 using System.Reflection;
@@ -12,10 +14,12 @@ namespace Presentation.ConrollerManager
         private ICurrentResponse _currentResponse;
         private readonly ICurrentRequestService _currentRequestService;
         private readonly ICurrentResponseService _currentResponseService;
-        public MainController(ICurrentRequestService currentRequestService, ICurrentResponseService currentResponseService)
+        private readonly IRedisService _redisService;
+        public MainController(ICurrentRequestService currentRequestService, ICurrentResponseService currentResponseService,IRedisService redisService)
         {
             _currentRequestService = currentRequestService;
             _currentResponseService = currentResponseService;
+            _redisService = redisService;
         }
 
         public async Task<IActionResult> CreatePage()
@@ -33,8 +37,7 @@ namespace Presentation.ConrollerManager
         }
         private async Task<IActionResult> InvokeActionAsync(string controllerName, string actionName)
         {
-
-
+            
             if (!string.IsNullOrEmpty(controllerName) && !string.IsNullOrEmpty(actionName))
             {
                 AssemblyHelper assemblyHelper = AssemblyHelper.GetAssemblyHelperSingleton;

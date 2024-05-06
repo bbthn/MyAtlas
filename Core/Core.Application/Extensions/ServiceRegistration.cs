@@ -24,7 +24,6 @@ namespace Core.Application.Extensions
         {
             services.AddSingleton<IRedisService,RedisService>();
             services.Configure<RedisSettings>(action);
-
             return services;
 
         }

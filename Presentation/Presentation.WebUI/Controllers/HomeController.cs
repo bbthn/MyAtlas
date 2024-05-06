@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Application.Attributes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebUI.Controllers
 {
     public class HomeController : Controller
     {
 
+        [AddRedisAttribute()]
         public IActionResult Index()
         {
-            var test = this.HttpContext;
             return View();
         }
     }
